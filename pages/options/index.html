@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div id="root">
+      <h1 class="geetings">
+        Olá, preguiçoso. Preenche aqui vamos gerar o seu ticket pra Narnia
+      </h1>
+
+      <form id="main-form" class="form">
+        <div class="input-group">
+          <label for="login" class="input-container" title="Usuário">
+            <i data-feather="user"></i>
+
+            <input type="text" id="login" name="login" placeholder="login" />
+          </label>
+
+          <label for="system" class="input-container" title="Sistema">
+            <i data-feather="monitor"></i>
+
+            <input type="text" id="system" name="system" placeholder="sistema" />
+          </label>
+        </div>
+
+        <button type="submit">Bora</button>
+      </form>
+    </div>
+
+    <script src="../../lib/feather.min.js"></script>
+    <script async src="script.js"></script>
+  </body>
+</html>
