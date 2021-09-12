@@ -19,8 +19,8 @@ function handleFormSubmit(event) {
     return;
   }
 
-  const isTryingToBreak = inputs.some((input) =>
-    /<|>|\\|\//.test(input.value?.trim())
+  const isTryingToBreak = inputs.some(
+    (input) => input.name !== "baseUrl" && /<|>|\\|\//.test(input.value?.trim())
   );
 
   if (isTryingToBreak) {
@@ -38,6 +38,8 @@ function handleFormSubmit(event) {
   );
 
   chrome.storage.sync.set({ requestData });
+
+  alert("Anotado, filhão.");
 }
 
 function loadStoredData() {

@@ -1,4 +1,5 @@
 const generateButton = document.getElementById("generate-ticket-button");
+const openDirectlyButton = document.getElementById("login-new-tab-button");
 const ticketInput = document.getElementById("ticket");
 
 if (ticketInput) setEvents();
@@ -36,6 +37,56 @@ function handleGenerateTicketClick() {
   });
 }
 
+function handleOpenDirectlyClick() {
+  if (openDirectlyButton.dataset["loading"] === "true") {
+    return;
+  }
+
+  let iElement;
+
+  chrome.storage.sync.get("requestData", async (storedData) => {
+    const requestData = storedData?.requestData || {};
+    openDirectlyButton.dataset["loading"] = "true";
+
+    iElement = document.createElement("i");
+    iElement.dataset["feather"] = "loader";
+    iElement.classList.add("rotate");
+
+    openDirectlyButton.innerHTML = "";
+    openDirectlyButton.appendChild(iElement);
+    feather.replace();
+
+    try {
+      const response = await fetch(
+        "https://api.github.com/users/angeloevangelista",
+        { method: "GET" }
+      );
+
+      const data = await response.json();
+
+      if (response.status !== 200) throw new Error(data);
+
+      const ticket = data.node_id;
+
+      var newURL = `${requestData.baseUrl}/ccds?ticket=${ticket}`;
+      chrome.tabs.create({ url: newURL });
+    } catch (error) {
+      alert("Deu ruim.");
+
+      console.error(error);
+    } finally {
+      iElement = document.createElement("i");
+      iElement.dataset["feather"] = "globe";
+
+      openDirectlyButton.innerHTML = "";
+      openDirectlyButton.appendChild(iElement);
+      openDirectlyButton.dataset["loading"] = "false";
+
+      feather.replace();
+    }
+  });
+}
+
 function setEvents() {
   document.querySelector("label[for=ticket]").addEventListener("click", () => {
     if (!ticketInput.value.trim()) return;
@@ -58,4 +109,7 @@ function setEvents() {
   });
 
   generateButton.addEventListener("click", handleGenerateTicketClick);
+  openDirectlyButton.addEventListener("click", handleOpenDirectlyClick);
 }
+
+feather.replace();

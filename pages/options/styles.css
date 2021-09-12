@@ -77,6 +77,14 @@ body {
   outline: none;
 }
 
+.form .input-container > input.lowercase {
+  text-transform: lowercase;
+}
+
+.form .input-container > input.lowercase::placeholder {
+  text-transform: uppercase;
+}
+
 .form button[type="submit"] {
   width: 10rem;
 

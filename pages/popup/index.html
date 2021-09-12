@@ -13,10 +13,17 @@
           <input readonly type="text" id="ticket" />
         </label>
 
-        <button id="generate-ticket-button" type="button">Gerar</button>
+        <div class="buttons-container">
+          <button class="primary" id="generate-ticket-button" type="button">Gerar</button>
+
+          <button class="icon" id="login-new-tab-button" type="button">
+            <i data-feather="globe"></i>
+          </button>
+        </div>
       </main>
     </div>
 
+    <script src="../../lib/feather.min.js"></script>
     <script async src="script.js"></script>
   </body>
 </html>
